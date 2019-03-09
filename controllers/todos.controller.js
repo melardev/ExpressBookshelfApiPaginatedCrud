@@ -93,7 +93,10 @@ exports.update = function (req, res, next) {
         const {title, description, completed} = req.body;
 
         todo.set('title', title);
-        todo.set('description', description);
+
+        if (description != null)
+            todo.set('description', description);
+        
         todo.set('completed', completed ? 1 : 0); // bookshelf interprets booleans as 1 or 0, to update successfully use 0 or 1
 
         todo.save().then(todo => {
